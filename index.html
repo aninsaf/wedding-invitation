@@ -1190,14 +1190,11 @@ function toggleMusic() {
 function copyToClipboard(elementId) {
   const text = document.getElementById(elementId).textContent;
   navigator.clipboard.writeText(text.trim()).then(() => {
-    const btns = document.querySelectorAll('.copy-btn');
-    btns.forEach(btn => {
-      if (btn.getAttribute('onclick').includes(elementId)) {
-        const orig = btn.textContent;
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = orig, 2000);
-      }
-    });
+    const btn = document.querySelector(`button[onclick="copyToClipboard('${elementId}')"]`);
+    if (btn) {
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    }
   });
 }
 
