@@ -1018,7 +1018,8 @@ async function submitRSVP() {
   }
 
   showMsg('Thank you! Your RSVP has been sent. ♡', 'success');
-  btn.textContent = 'RSVP Sent ✓';
+btn.textContent = 'Send RSVP';
+btn.disabled = false;
 
   // Clear form
   document.getElementById('rsvp-name').value = '';
