@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation — XXX & XXX</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ===================== CONFIGURATION ===================== */
+  /* Edit these values to customize the invitation */
+  :root {
+    --groom-name: "XXX";
+    --bride-name: "XXX";
+
+    /* Color palette */
+    --cream: #F9F5EF;
+    --ivory: #FAF7F2;
+    --gold: #B8935A;
+    --gold-light: #D4B483;
+    --gold-dark: #8B6A3A;
+    --dark: #2C2418;
+    --mid: #5A4D3A;
+    --muted: #8C7B68;
+    --white: #FFFFFF;
+    --overlay: rgba(30, 22, 10, 0.55);
+
+    /* Typography */
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ===================== UTILITIES ===================== */
+  .section {
+    padding: 80px 24px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--gold-light);
+  }
+  .divider-ornament {
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 6px;
+  }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .heading-display {
+    font-family: var(--serif);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--dark);
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===================== COVER ===================== */
+  #cover {
+    min-height: 100svh;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(184, 147, 90, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 100% 100%, rgba(184, 147, 90, 0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cover-ornament {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 40px;
+    font-family: var(--sans);
+    font-weight: 400;
+  }
+
+  .cover-names {
+    font-family: var(--serif);
+    font-size: clamp(60px, 16vw, 100px);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--cream);
+    letter-spacing: -1px;
+  }
+
+  .cover-ampersand {
+    display: block;
+    font-size: clamp(40px, 10vw, 64px);
+    color: var(--gold);
+    font-style: italic;
+    margin: 8px 0;
+  }
+
+  .cover-date {
+    margin-top: 40px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .cover-scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(249, 245, 239, 0.4);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 0.5px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(184,147,90,0.6), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  /* ===================== COUPLE SECTION ===================== */
+  #couple {
+    text-align: center;
+    background: var(--ivory);
+  }
+
+  .couple-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+    margin: 40px 0;
+  }
+
+  .person-card { text-align: center; }
+
+  .person-photo-ring {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-light);
+    padding: 6px;
+    margin: 0 auto 16px;
+    background: var(--cream);
+  }
+
+  .person-photo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 40px;
+    color: var(--gold);
+    font-style: italic;
+    /* Replace background with: background-image: url('your-photo.jpg'); background-size: cover; */
+  }
+
+  .person-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--dark);
+  }
+
+  .person-parents {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+
+  .person-parents strong {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .couple-and {
+    font-family: var(--serif);
+    font-size: 48px;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  /* ===================== COUNTDOWN ===================== */
+  #countdown {
+    background: var(--dark);
+    text-align: center;
+    padding: 80px 24px;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: clamp(16px, 4vw, 48px);
+    margin: 40px 0;
+    flex-wrap: wrap;
+  }
+
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .countdown-number {
+    font-family: var(--serif);
+    font-size: clamp(48px, 12vw, 80px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .countdown-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .countdown-sep {
+    font-family: var(--serif);
+    font-size: 60px;
+    color: var(--gold);
+    line-height: 1.2;
+    padding-top: 8px;
+  }
+
+  /* ===================== EVENT DETAILS ===================== */
+  #event {
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .event-card {
+    background: var(--white);
+    border: 0.5px solid var(--gold-light);
+    border-radius: 2px;
+    padding: 40px 32px;
+    margin: 32px 0;
+  }
+
+  .event-time {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--dark);
+    margin: 8px 0;
+  }
+
+  .event-date-link {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--gold-light);
+    padding-bottom: 2px;
+    margin-top: 16px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .event-date-link:hover { color: var(--gold-dark); border-color: var(--gold-dark); }
+
+  .venue-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-top: 24px;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .venue-link:hover { color: var(--gold); }
+
+  .venue-icon {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    flex-shrink: 0;
+  }
+
+  /* ===================== RSVP ===================== */
+  #rsvp {
+    background: var(--ivory);
+    text-align: center;
+  }
+
+  .rsvp-form {
+    background: var(--white);
+    border: 0.5px solid #E0D5C5;
+    border-radius: 2px;
+    padding: 40px 32px;
+    text-align: left;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .form-input {
+    width: 100%;
+    border: 0.5px solid #D0C4B0;
+    background: var(--cream);
+    padding: 12px 16px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--dark);
+    border-radius: 1px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  .form-input::placeholder { color: var(--muted); }
+
+  .attendance-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .toggle-option { display: none; }
+  .toggle-label {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border: 0.5px solid #D0C4B0;
+    background: var(--cream);
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--mid);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 1px;
+  }
+  .toggle-option:checked + .toggle-label {
+    background: var(--gold);
+    color: var(--cream);
+    border-color: var(--gold);
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--dark);
+    color: var(--cream);
+    border: none;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 1px;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--mid); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .form-message {
+    text-align: center;
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 1px;
+    margin-top: 16px;
+    display: none;
+  }
+  .form-message.success {
+    display: block;
+    background: #EDF7F0;
+    color: #2D6A4F;
+    border: 0.5px solid #95D5B2;
+  }
+  .form-message.error {
+    display: block;
+    background: #FDECEA;
+    color: #8B2020;
+    border: 0.5px solid #F5C2C2;
+  }
+
+  /* ===================== WISHES ===================== */
+  #wishes {
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .wishes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+    text-align: left;
+  }
+
+  .wish-card {
+    background: var(--white);
+    border: 0.5px solid #E5DAC8;
+    border-radius: 2px;
+    padding: 24px;
+    animation: fadeSlideIn 0.5s ease;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .wish-name {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+
+  .wish-message {
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .wishes-empty {
+    color: var(--muted);
+    font-size: 14px;
+    padding: 32px;
+    font-style: italic;
+  }
+
+  /* ===================== GIFT ===================== */
+  #gift {
+    background: var(--dark);
+    text-align: center;
+  }
+
+  .gift-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  @media (max-width: 480px) {
+    .gift-cards { grid-template-columns: 1fr; }
+  }
+
+  .gift-card {
+    background: rgba(255,255,255,0.05);
+    border: 0.5px solid rgba(184,147,90,0.3);
+    border-radius: 2px;
+    padding: 28px 20px;
+    text-align: left;
+  }
+
+  .gift-card-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .gift-value {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--cream);
+    line-height: 1.4;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: none;
+    border: 0.5px solid rgba(184,147,90,0.4);
+    padding: 6px 14px;
+    border-radius: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--sans);
+  }
+  .copy-btn:hover { background: rgba(184,147,90,0.1); }
+
+  /* ===================== CLOSING ===================== */
+  #closing {
+    background: var(--ivory);
+    text-align: center;
+    padding: 80px 24px 60px;
+  }
+
+  .closing-verse {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--mid);
+    line-height: 1.8;
+    max-width: 420px;
+    margin: 0 auto 32px;
+  }
+
+  .closing-sig {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--dark);
+    line-height: 1.1;
+  }
+
+  .closing-sig span { color: var(--gold); font-style: italic; }
+
+  .closing-footer {
+    margin-top: 48px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ===================== MUSIC BUTTON ===================== */
+  .music-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--dark);
+    border: 0.5px solid var(--gold);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+  }
+  .music-btn:hover { transform: scale(1.05); }
+
+  .music-icon { width: 18px; height: 18px; fill: currentColor; }
+
+  /* ===================== DARK SECTION TEXT ===================== */
+  #countdown .heading-display,
+  #closing-dark .heading-display,
+  #gift .heading-display { color: var(--cream); }
+
+  #countdown .eyebrow,
+  #gift .eyebrow { color: var(--gold-light); }
+
+  #countdown .divider::before,
+  #countdown .divider::after,
+  #gift .divider::before,
+  #gift .divider::after { background: rgba(184,147,90,0.4); }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width: 480px) {
+    .couple-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .couple-and { display: none; }
+    .rsvp-form { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section id="cover">
+  <p class="cover-ornament">You are cordially invited to the wedding of</p>
+
+  <div class="cover-names">
+    <!-- EDIT: Replace XXX with groom's first name -->
+    <span>XXX</span>
+    <span class="cover-ampersand">&</span>
+    <!-- EDIT: Replace XXX with bride's first name -->
+    <span>XXX</span>
+  </div>
+
+  <!-- EDIT: Replace with your wedding date -->
+  <p class="cover-date">XXX · XXX · XXXX</p>
+
+  <div class="cover-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ===================== COUPLE SECTION ===================== -->
+<section id="couple" class="section" style="max-width: 640px;">
+  <span class="eyebrow fade-in">The Happy Couple</span>
+  <h2 class="heading-display fade-in" style="font-size: clamp(36px, 8vw, 56px);">Two Souls, One Story</h2>
+
+  <div class="divider fade-in"><span class="divider-ornament">✦ ✦ ✦</span></div>
+
+  <div class="couple-grid fade-in">
+    <div class="person-card">
+      <div class="person-photo-ring">
+        <div class="person-photo-inner">
+          <!-- EDIT: Replace with <img src="groom-photo.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover"> -->
+          G
+        </div>
+      </div>
+      <!-- EDIT: Replace XXX with groom's full name -->
+      <p class="person-name">XXX</p>
+      <div class="person-parents">
+        <strong>Son of</strong>
+        <!-- EDIT: Replace XXX with groom's father's name -->
+        Mr. XXX<br>
+        <!-- EDIT: Replace XXX with groom's mother's name -->
+        & Mrs. XXX
+      </div>
+    </div>
+
+    <div class="couple-and">&</div>
+
+    <div class="person-card">
+      <div class="person-photo-ring">
+        <div class="person-photo-inner">
+          <!-- EDIT: Replace with <img src="bride-photo.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover"> -->
+          B
+        </div>
+      </div>
+      <!-- EDIT: Replace XXX with bride's full name -->
+      <p class="person-name">XXX</p>
+      <div class="person-parents">
+        <strong>Daughter of</strong>
+        <!-- EDIT: Replace XXX with bride's father's name -->
+        Mr. XXX<br>
+        <!-- EDIT: Replace XXX with bride's mother's name -->
+        & Mrs. XXX
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COUNTDOWN ===================== -->
+<section id="countdown">
+  <div style="max-width: 640px; margin: 0 auto; text-align: center;">
+    <span class="eyebrow fade-in">Counting Down To</span>
+    <h2 class="heading-display fade-in" style="font-size: clamp(32px, 7vw, 48px); color: var(--cream);">The Big Day</h2>
+
+    <div class="countdown-grid fade-in">
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-days">00</span>
+        <span class="countdown-label">Days</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-hours">00</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-minutes">00</span>
+        <span class="countdown-label">Minutes</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-seconds">00</span>
+        <span class="countdown-label">Seconds</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EVENT DETAILS ===================== -->
+<section id="event" class="section" style="text-align:center;">
+  <span class="eyebrow fade-in">Save The Date</span>
+  <h2 class="heading-display fade-in" style="font-size: clamp(32px, 7vw, 48px);">The Ceremony</h2>
+
+  <div class="divider fade-in"><span class="divider-ornament">✦ ✦ ✦</span></div>
+
+  <div class="event-card fade-in">
+    <!-- EDIT: Replace XXX with day of week, e.g. "Saturday" -->
+    <p class="eyebrow" style="margin-bottom:4px;">XXX</p>
+    <!-- EDIT: Replace with full date, e.g. "12 April 2025" -->
+    <p class="heading-display" style="font-size: clamp(28px, 7vw, 42px);">XXX</p>
+
+    <div class="divider" style="margin: 20px 0;"><span class="divider-ornament">·</span></div>
+
+    <!-- EDIT: Replace with ceremony time, e.g. "10:00" -->
+    <p class="event-time">XX:XX</p>
+    <p style="font-size: 12px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;">
+      <!-- EDIT: Replace with timezone or "WIB" / "WIT" etc. -->
+      XXX
+    </p>
+
+    <!-- EDIT: Replace YOUR-GOOGLE-CALENDAR-LINK with the generated link below -->
+    <!-- To generate: https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Groom+%26+Bride&dates=20250412T030000Z/20250412T080000Z&details=Wedding+ceremony&location=VENUE+ADDRESS -->
+    <a class="event-date-link" href="YOUR-GOOGLE-CALENDAR-LINK" target="_blank" rel="noopener">
+      📅 Add to Google Calendar
+    </a>
+  </div>
+
+  <div class="event-card fade-in" style="margin-top: 0;">
+    <p class="eyebrow">Venue</p>
+    <!-- EDIT: Replace XXX with venue name -->
+    <p class="heading-display" style="font-size: 28px;">XXX</p>
+
+    <!-- EDIT: Replace VENUE-ADDRESS with your full address and update the maps link -->
+    <a class="venue-link" href="https://maps.google.com/?q=VENUE-ADDRESS" target="_blank" rel="noopener">
+      <svg class="venue-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      <!-- EDIT: Replace with your full venue address -->
+      XXX, XXX, XXX
+    </a>
+  </div>
+</section>
+
+<!-- ===================== RSVP ===================== -->
+<section id="rsvp" class="section">
+  <span class="eyebrow fade-in" style="display:block; text-align:center;">Kindly Reply By</span>
+  <!-- EDIT: Replace with RSVP deadline date -->
+  <h2 class="heading-display fade-in" style="font-size: clamp(32px, 7vw, 48px); text-align:center;">RSVP</h2>
+
+  <div class="divider fade-in"><span class="divider-ornament">✦ ✦ ✦</span></div>
+
+  <div class="rsvp-form fade-in">
+    <div class="form-group">
+      <label class="form-label" for="rsvp-name">Full Name</label>
+      <input class="form-input" type="text" id="rsvp-name" placeholder="Your full name" autocomplete="name">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Attendance</label>
+      <div class="attendance-toggle">
+        <input type="radio" name="attendance" id="att-yes" value="Attending" class="toggle-option">
+        <label class="toggle-label" for="att-yes">✓ Attending</label>
+
+        <input type="radio" name="attendance" id="att-no" value="Not Attending" class="toggle-option">
+        <label class="toggle-label" for="att-no">✗ Not Attending</label>
+      </div>
+    </div>
+
+    <div class="form-group" id="guest-count-group">
+      <label class="form-label" for="rsvp-guests">Number of Guests</label>
+      <input class="form-input" type="number" id="rsvp-guests" min="1" max="10" value="1" placeholder="1">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="rsvp-message">Wishes for the Couple</label>
+      <textarea class="form-input" id="rsvp-message" rows="4" placeholder="Share your heartfelt wishes…" style="resize: vertical;"></textarea>
+    </div>
+
+    <button class="form-submit" id="rsvp-submit" onclick="submitRSVP()">Send RSVP</button>
+
+    <div class="form-message" id="form-message"></div>
+  </div>
+</section>
+
+<!-- ===================== WEDDING WISHES ===================== -->
+<section id="wishes" class="section">
+  <span class="eyebrow fade-in" style="display:block; text-align:center;">From the Heart</span>
+  <h2 class="heading-display fade-in" style="font-size: clamp(32px, 7vw, 48px); text-align:center;">Wishes</h2>
+
+  <div class="divider fade-in"><span class="divider-ornament">✦ ✦ ✦</span></div>
+
+  <div class="wishes-grid fade-in" id="wishes-grid">
+    <div class="wishes-empty" id="wishes-empty">Wishes will appear here once guests send their RSVP.</div>
+  </div>
+</section>
+
+<!-- ===================== GIFT ===================== -->
+<section id="gift" style="background: var(--dark); padding: 80px 24px; text-align: center;">
+  <div style="max-width: 640px; margin: 0 auto;">
+    <span class="eyebrow fade-in" style="color: var(--gold-light);">A Thoughtful Gesture</span>
+    <h2 class="heading-display fade-in" style="font-size: clamp(28px, 7vw, 44px); color: var(--cream);">
+      Wanna give us some gifts?
+    </h2>
+
+    <div class="divider fade-in" style="margin: 24px 0;">
+      <span class="divider-ornament" style="color: var(--gold);">✦ ✦ ✦</span>
+    </div>
+
+    <p class="fade-in" style="color: rgba(249,245,239,0.6); font-size: 13px; line-height: 1.7; max-width: 400px; margin: 0 auto 32px;">
+      Your presence is the greatest gift. But if you'd like to share in our joy with a gesture, we are truly grateful.
+    </p>
+
+    <div class="gift-cards fade-in">
+      <div class="gift-card">
+        <span class="gift-card-label">Bank Transfer</span>
+        <!-- EDIT: Replace XXX with bank name and account number -->
+        <p class="gift-value">Bank XXX</p>
+        <p class="gift-value" id="bank-account" style="font-size: 24px; letter-spacing: 2px; margin-top: 4px;">XXX XXX XXX</p>
+        <p style="font-size: 12px; color: var(--gold-light); margin-top: 6px;">
+          <!-- EDIT: Replace XXX with account holder name -->
+          a.n. XXX
+        </p>
+        <button class="copy-btn" onclick="copyToClipboard('bank-account')">Copy</button>
+      </div>
+
+      <div class="gift-card">
+        <span class="gift-card-label">Gift Delivery</span>
+        <!-- EDIT: Replace XXX with your gift delivery address -->
+        <p class="gift-value" id="gift-address">XXX, XXX, XXX XXXXX</p>
+        <button class="copy-btn" onclick="copyToClipboard('gift-address')">Copy</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CLOSING ===================== -->
+<section id="closing">
+  <span class="eyebrow fade-in" style="display:block; text-align:center;">With Love</span>
+
+  <div class="divider fade-in"><span class="divider-ornament">✦ ✦ ✦</span></div>
+
+  <p class="closing-verse fade-in">
+    "And they lived happily ever after, not because there were no storms,
+    but because they faced them together."
+  </p>
+
+  <div class="closing-sig fade-in">
+    <!-- EDIT: Replace with groom's name -->
+    XXX <span>&</span> XXX
+    <!-- EDIT: Replace with bride's name -->
+  </div>
+
+  <p class="closing-footer fade-in" style="margin-top: 48px;">
+    <!-- EDIT: Replace with your wedding date -->
+    XXX · XXXX
+  </p>
+</section>
+
+<!-- ===================== FLOATING MUSIC BUTTON ===================== -->
+<!-- EDIT: Replace 'your-music.mp3' with the path to your music file -->
+<audio id="bg-music" loop>
+  <source src="your-music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="music-btn" onclick="toggleMusic()" title="Toggle music" aria-label="Toggle background music">
+  <svg class="music-icon" id="music-icon-play" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+  <svg class="music-icon" id="music-icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+
+
+<script>
+/* ===================== CONFIGURATION ===================== */
+
+// EDIT: Set your wedding date and time (YYYY, MM-1, DD, HH, MM, SS)
+// Month is 0-indexed: January=0, February=1, ..., December=11
+const WEDDING_DATE = new Date(2025, 3, 12, 10, 0, 0); // April 12, 2025 at 10:00
+
+// EDIT: Set your Google Apps Script Web App URL here after deploying
+// Instructions: see the Apps Script section below
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
+
+
+/* ===================== COUNTDOWN ===================== */
+function updateCountdown() {
+  const now = new Date();
+  const diff = WEDDING_DATE - now;
+
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-minutes').textContent = '00';
+    document.getElementById('cd-seconds').textContent = '00';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+
+/* ===================== RSVP SUBMISSION ===================== */
+async function submitRSVP() {
+  const name = document.getElementById('rsvp-name').value.trim();
+  const attendance = document.querySelector('input[name="attendance"]:checked');
+  const guests = document.getElementById('rsvp-guests').value;
+  const message = document.getElementById('rsvp-message').value.trim();
+  const btn = document.getElementById('rsvp-submit');
+  const msgEl = document.getElementById('form-message');
+
+  if (!name) return showMsg('Please enter your full name.', 'error');
+  if (!attendance) return showMsg('Please select your attendance.', 'error');
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const payload = {
+    name,
+    attendance: attendance.value,
+    guests: attendance.value === 'Attending' ? guests : 0,
+    message,
+    timestamp: new Date().toISOString()
+  };
+
+  // Save locally for immediate wish display
+  saveWishLocally(payload);
+
+  // Submit to Google Sheets
+  if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL') {
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {
+      console.warn('Could not reach Google Sheets, saved locally only.');
+    }
+  }
+
+  showMsg('Thank you! Your RSVP has been sent. ♡', 'success');
+  btn.textContent = 'RSVP Sent ✓';
+
+  // Clear form
+  document.getElementById('rsvp-name').value = '';
+  document.getElementById('rsvp-guests').value = '1';
+  document.getElementById('rsvp-message').value = '';
+  document.querySelectorAll('input[name="attendance"]').forEach(r => r.checked = false);
+}
+
+function showMsg(text, type) {
+  const el = document.getElementById('form-message');
+  el.textContent = text;
+  el.className = 'form-message ' + type;
+}
+
+
+/* ===================== WISHES DISPLAY ===================== */
+const STORAGE_KEY = 'wedding_wishes_v1';
+
+function saveWishLocally(data) {
+  if (!data.message) return;
+  const wishes = getWishes();
+  wishes.unshift({ name: data.name, message: data.message, ts: data.timestamp });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes.slice(0, 50)));
+  renderWishes();
+}
+
+function getWishes() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  } catch { return []; }
+}
+
+function renderWishes() {
+  const grid = document.getElementById('wishes-grid');
+  const empty = document.getElementById('wishes-empty');
+  const wishes = getWishes();
+
+  if (wishes.length === 0) {
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+
+  if (empty) empty.style.display = 'none';
+
+  // Remove old cards (not the empty placeholder)
+  grid.querySelectorAll('.wish-card').forEach(c => c.remove());
+
+  wishes.forEach(w => {
+    const card = document.createElement('div');
+    card.className = 'wish-card';
+    card.innerHTML = `
+      <p class="wish-name">${escapeHtml(w.name)}</p>
+      <p class="wish-message">"${escapeHtml(w.message)}"</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+renderWishes();
+
+
+/* ===================== LOAD WISHES FROM SHEETS ===================== */
+// Optional: fetch wishes from Google Sheets to show all guests' wishes
+async function loadWishesFromSheets() {
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') return;
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + '?action=getWishes');
+    const data = await res.json();
+    if (Array.isArray(data)) {
+      const existing = getWishes().map(w => w.ts);
+      data.forEach(w => {
+        if (!existing.includes(w.ts) && w.message) {
+          const wishes = getWishes();
+          wishes.push(w);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes));
+        }
+      });
+      renderWishes();
+    }
+  } catch (e) { /* offline graceful */ }
+}
+
+loadWishesFromSheets();
+
+
+/* ===================== MUSIC ===================== */
+let musicPlaying = false;
+function toggleMusic() {
+  const audio = document.getElementById('bg-music');
+  const play = document.getElementById('music-icon-play');
+  const pause = document.getElementById('music-icon-pause');
+
+  if (musicPlaying) {
+    audio.pause();
+    play.style.display = 'block';
+    pause.style.display = 'none';
+  } else {
+    audio.play().catch(() => {});
+    play.style.display = 'none';
+    pause.style.display = 'block';
+  }
+  musicPlaying = !musicPlaying;
+}
+
+
+/* ===================== COPY TO CLIPBOARD ===================== */
+function copyToClipboard(elementId) {
+  const text = document.getElementById(elementId).textContent;
+  navigator.clipboard.writeText(text.trim()).then(() => {
+    const btns = document.querySelectorAll('.copy-btn');
+    btns.forEach(btn => {
+      if (btn.getAttribute('onclick').includes(elementId)) {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = orig, 2000);
+      }
+    });
+  });
+}
+
+
+/* ===================== FADE-IN ON SCROLL ===================== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
+
+<!--
+=======================================================================
+  GOOGLE APPS SCRIPT — Deploy this to connect RSVP to Google Sheets
+=======================================================================
+
+STEP 1: Open Google Sheets, create a new spreadsheet named "Wedding RSVPs"
+STEP 2: Go to Extensions → Apps Script
+STEP 3: Paste the code below and save
+STEP 4: Click Deploy → New Deployment → Web App
+  - Execute as: Me
+  - Who has access: Anyone
+STEP 5: Copy the Web App URL and paste it into APPS_SCRIPT_URL above
+
+----------- PASTE THIS INTO APPS SCRIPT -----------
+
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+  // Add headers if empty
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(['Timestamp', 'Name', 'Attendance', 'Guests', 'Message']);
+    sheet.getRange(1, 1, 1, 5).setFontWeight('bold');
+  }
+
+  const data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    data.timestamp || new Date().toISOString(),
+    data.name || '',
+    data.attendance || '',
+    data.guests || 0,
+    data.message || ''
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'ok' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doGet(e) {
+  if (e.parameter.action === 'getWishes') {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const rows = sheet.getDataRange().getValues();
+    const wishes = [];
+    for (let i = 1; i < rows.length; i++) {
+      if (rows[i][4]) {  // has message
+        wishes.push({ ts: rows[i][0], name: rows[i][1], message: rows[i][4] });
+      }
+    }
+    return ContentService
+      .createTextOutput(JSON.stringify(wishes))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  return ContentService.createTextOutput('ok');
+}
+
+----------- END OF APPS SCRIPT -----------
+
+=======================================================================
+  GOOGLE CALENDAR LINK GENERATOR
+=======================================================================
+
+Replace in the HTML with your details:
+https://calendar.google.com/calendar/render?action=TEMPLATE
+  &text=Wedding+of+GROOM+%26+BRIDE
+  &dates=20250412T030000Z/20250412T080000Z   ← use UTC time
+  &details=We+joyfully+invite+you+to+celebrate+our+wedding
+  &location=YOUR+VENUE+ADDRESS
+
+=======================================================================
+  ALL PLACEHOLDERS TO REPLACE
+=======================================================================
+
+Search for "XXX" in this file and replace:
+  1. Groom first name (cover section)
+  2. Bride first name (cover section)
+  3. Wedding date (cover + event + closing sections)
+  4. Groom full name (couple section)
+  5. Groom's father name
+  6. Groom's mother name
+  7. Bride full name (couple section)
+  8. Bride's father name
+  9. Bride's mother name
+  10. Event day of week
+  11. Event full date
+  12. Ceremony time
+  13. Timezone
+  14. Venue name
+  15. Venue address (Maps link + text)
+  16. Bank name + account number
+  17. Account holder name
+  18. Gift delivery address
+
+Then set:
+  - WEDDING_DATE in the JavaScript
+  - APPS_SCRIPT_URL in the JavaScript
+  - YOUR-GOOGLE-CALENDAR-LINK in the HTML
+  - your-music.mp3 path
+
+=======================================================================
+  GITHUB PAGES DEPLOYMENT
+=======================================================================
+
+1. Create a GitHub repository (e.g. "our-wedding")
+2. Upload this file as index.html
+3. Upload your photos, music file to the same repo
+4. Go to Settings → Pages → Deploy from main branch
+5. Your site will be live at: https://yourusername.github.io/our-wedding
+
+=======================================================================
+-->
