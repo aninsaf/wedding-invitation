@@ -121,6 +121,14 @@
   }
 
   .cover-ornament {
+    .cover-guest {
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--gold-light);
+  margin-top: 8px;
+  font-family: var(--sans);
+  font-style: italic;
+}
     font-size: 11px;
     letter-spacing: 5px;
     text-transform: uppercase;
@@ -1119,6 +1127,11 @@ loadWishesFromSheets();
 
 
 /* ===================== MUSIC ===================== */
+  const params = new URLSearchParams(window.location.search);
+const guestName = params.get('to');
+if (guestName) {
+  document.getElementById('cover-guest').textContent = 'Dear ' + guestName + ',';
+}
 let musicPlaying = false;
   document.addEventListener('click', function startMusic() {
   if (!musicPlaying) {
