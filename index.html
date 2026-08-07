@@ -1113,6 +1113,15 @@ loadWishesFromSheets();
 
 /* ===================== MUSIC ===================== */
 let musicPlaying = false;
+  document.addEventListener('click', function startMusic() {
+  if (!musicPlaying) {
+    document.getElementById('bg-music').play().catch(() => {});
+    document.getElementById('music-icon-play').style.display = 'none';
+    document.getElementById('music-icon-pause').style.display = 'block';
+    musicPlaying = true;
+  }
+  document.removeEventListener('click', startMusic);
+}, { once: true });
 function toggleMusic() {
   const audio = document.getElementById('bg-music');
   const play = document.getElementById('music-icon-play');
