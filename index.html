@@ -1136,8 +1136,35 @@ loadWishesFromSheets();
   const params = new URLSearchParams(window.location.search);
 const guestName = params.get('to');
 if (guestName) {
-  document.getElementById('cover-guest').textContent = 'Dear ' + guestName + ',';
-}
+  const name = 'Dear ' + guestName + ',';
+const arcContainer = document.getElementById('cover-guest');
+const svgNS = 'http://www.w3.org/2000/svg';
+const svg = document.createElementNS(svgNS, 'svg');
+svg.setAttribute('viewBox', '0 0 300 100');
+svg.setAttribute('width', '300');
+svg.setAttribute('height', '80');
+
+const path = document.createElementNS(svgNS, 'path');
+path.setAttribute('id', 'arc-path');
+path.setAttribute('d', 'M 20,80 Q 150,0 280,80');
+path.setAttribute('fill', 'none');
+
+const textEl = document.createElementNS(svgNS, 'text');
+textEl.setAttribute('font-family', 'Cormorant Garamond, serif');
+textEl.setAttribute('font-size', '24');
+textEl.setAttribute('font-style', 'italic');
+textEl.setAttribute('fill', '#F2C4CE');
+textEl.setAttribute('text-anchor', 'middle');
+
+const textPath = document.createElementNS(svgNS, 'textPath');
+textPath.setAttribute('href', '#arc-path');
+textPath.setAttribute('startOffset', '50%');
+textPath.textContent = name;
+
+textEl.appendChild(textPath);
+svg.appendChild(path);
+svg.appendChild(textEl);
+arcContainer.appendChild(svg);
 let musicPlaying = false;
   document.addEventListener('click', function startMusic() {
   if (!musicPlaying) {
